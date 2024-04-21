@@ -43,10 +43,23 @@ export default function VendorList({
     );
   };
 
-  const initiateAgents = () => {
-    const selectedVendors = vendors.filter((vendor) => vendor.selected);
+  const initiateAgents = async () => {
+    // const selectedVendors = vendors.filter((vendor) => vendor.selected);
 
-    console.log("Selected Vendors", selectedVendors);
+    // console.log("Selected Vendors", selectedVendors);
+
+    // fetch http://127.0.0.1:8080/make-call/
+
+    await fetch("http://127.0.0.1:8080/make-call/", {
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
 
   return (
@@ -98,7 +111,7 @@ export default function VendorList({
       </CardContent>
       <CardFooter className="flex justify-end">
         {/* <Button variant="outline">Start</Button> */}
-        <Button onClick={initiateAgents}>I Know A Guy</Button>
+        <Button onClick={async () => await initiateAgents()}>I Know A Guy</Button>
       </CardFooter>
     </Card>
   );
