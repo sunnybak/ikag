@@ -1,6 +1,6 @@
 export interface Quote {
   sku: string;
-  quote: number;
+  quote: string;
   quantity: number;
   date: string;
   email: string;

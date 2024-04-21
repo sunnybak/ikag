@@ -1,1 +1,30 @@
-[]
+[
+  {
+    "sku": "Covidien #SMM-5043",
+    "quote": "$690 per unit",
+    "quantity": 15,
+    "date": "05/01/2024",
+    "email": "123@gmail.com"
+  },
+  {
+    "sku": "Covidien #SMM-5043",
+    "quote": 695,
+    "quantity": 15,
+    "date": "04/21/2024",
+    "email": "A@gmail.com"
+  },
+  {
+    "sku": "SMM-5043",
+    "quote": "$800",
+    "quantity": 15,
+    "date": "06/21/2024",
+    "email": "L@gmail.com"
+  },
+  {
+    "sku": "SMM-5043",
+    "quote": "$10,000",
+    "quantity": 15,
+    "date": "04/21/2024",
+    "email": ""
+  }
+]

@@ -115,8 +115,25 @@ export default function VendorList({
   };
 
   const initiateCall = async (phoneNumber: string) => {
+    // get the lowest quote from the quotes array
+    let bestQuote = 700;
+    // iterate the quotes and if the quote is lower than the best quote, update the best quote
+    quotes.forEach((quote) => {
+      let quotePrice;
+      // replace the $ and , in the quote
+      try {
+        quotePrice = quote.quote.replace("$", "");
+        quotePrice = quotePrice.replace(",", "");
+        if (parseInt(quotePrice) < bestQuote) {
+          bestQuote = parseInt(quotePrice);
+        }
+      } catch (e) {
+        bestQuote = 700;
+      }
+    });
+
     return await fetch(
-      `http://127.0.0.1:8080/make-call/?phone=${phoneNumber}`,
+      `http://127.0.0.1:8080/make-call/?phone=${phoneNumber}?`,
       {
         method: "GET",
       }
@@ -192,13 +209,6 @@ export default function VendorList({
             disabled={selectedVendors.length === 0 || loading}
           >
             I Know A Guy
-          </Button>
-
-          <Button
-            onClick={async () => await callEveryrone()}
-            disabled={selectedVendors.length === 0 || loading}
-          >
-            Call Everyone
           </Button>
         </CardFooter>
       </Card>
