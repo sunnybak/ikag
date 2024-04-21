@@ -96,7 +96,7 @@ export default function VendorList({
   };
 
   const initiateCall = async (phoneNumber: string) => {
-    return await fetch(`http://127.0.0.1:8080/make-call/${phoneNumber}`, {
+    return await fetch(`http://127.0.0.1:8080/make-call/?phone=${phoneNumber}`, {
       method: "GET",
     })
       .then((response) => response.json())
