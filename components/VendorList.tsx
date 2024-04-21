@@ -54,6 +54,7 @@ export default function VendorList({
   const startPollingQuotes = (initiateNextCall: boolean) => {
     setLoading(true);
     setLoadingIndex(0);
+    let localQuotes = [] as Quote[];
 
     const interval = setInterval(async () => {
       const response = await fetch("/api/quotes");
@@ -61,16 +62,17 @@ export default function VendorList({
 
       const newQuotes = body.data;
 
-      if (newQuotes.length > quotes.length) {
+      if (newQuotes.length > localQuotes.length) {
         console.log("New Quotes", newQuotes);
-        console.log("Old Quotes", quotes);
+        console.log("Old Quotes", localQuotes);
 
         setQuotes(newQuotes);
+        localQuotes = newQuotes;
         setLoadingIndex(newQuotes.length);
 
         // Pass data
         if (initiateNextCall) {
-          await initiateCall(vendors[loadingIndex].phoneNumber);
+          await initiateCall(vendors[newQuotes.length].phoneNumber);
         }
       }
 
