@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { AppActionType, useAppContext } from "@/context/context";
 import { Button } from "./ui/button";
@@ -19,22 +19,28 @@ import {
   TableHeader,
   TableRow,
 } from "./ui/table";
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { Vendor } from "@/models/vendor";
+import ButtonSpinner from "./ButtonSpinner";
 
-export default function VendorList() {
-
-  const [vendors, setVendors] = useState<Vendor[]>([]);
-
+export default function VendorList({
+  vendors,
+  updateVendors,
+  vendorsLoading,
+}: {
+  vendors: Vendor[];
+  updateVendors: (vendors: Vendor[]) => void;
+  vendorsLoading: boolean;
+}) {
   const selectVendor = (index: number) => {
-    setVendors((prevVendors: any) => {
-      return prevVendors.map((vendor: any, i: any) => {
+    updateVendors(
+      vendors.map((vendor: any, i: any) => {
         if (i === index) {
           return { ...vendor, selected: !vendor.selected };
         }
         return vendor;
-      });
-    });
+      })
+    );
   };
 
   const initiateAgents = () => {
@@ -53,7 +59,13 @@ export default function VendorList() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        {vendors.length > 0 && (
+        {vendorsLoading && (
+          <div className="w-full h-[200px] flex items-center justify-center">
+            <ButtonSpinner />
+          </div>
+        )}
+
+        {!vendorsLoading && vendors.length > 0 && (
           <Table className="w-full">
             <TableHeader>
               <TableRow>
