@@ -2,9 +2,8 @@ import fs from "fs";
 import { NextResponse } from "next/server";
 
 export const POST = async (request: any) => {
-  const { sku, quote, quantity, date, email } = await request.json();
+  const { sku_id: sku, quote, quantity, delivery_date: date, email } = await request.json();
 
-  // Read the existing data from the file
   let rawData = fs.readFileSync("output.json") as any;
   let jsonData = JSON.parse(rawData);
 
