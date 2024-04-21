@@ -69,7 +69,7 @@ export default function VendorList({
         setLoadingIndex(newQuotes.length);
 
         // Pass data
-        await initiateCall();
+        await initiateCall(vendors[loadingIndex].phoneNumber);
       }
 
       if (newQuotes.length === selectedVendors.length) {
@@ -88,14 +88,15 @@ export default function VendorList({
 
     // fetch http://127.0.0.1:8080/make-call/
 
+    await fetch("/api/clear", { method: "POST" });
     startPollingQuotes();
 
     // pass data
-    await initiateCall();
+    await initiateCall(vendors[0].phoneNumber);
   };
 
-  const initiateCall = async () => {
-    return await fetch("http://127.0.0.1:8080/make-call/", {
+  const initiateCall = async (phoneNumber: string) => {
+    return await fetch(`http://127.0.0.1:8080/make-call/${phoneNumber}`, {
       method: "GET",
     })
       .then((response) => response.json())
@@ -130,7 +131,8 @@ export default function VendorList({
                 <TableRow>
                   <TableHead></TableHead>
                   <TableHead>Name</TableHead>
-                  <TableHead>Link</TableHead>
+                  <TableHead>SKU</TableHead>
+                  <TableHead>Phone</TableHead>
                   <TableHead>Price</TableHead>
                   <TableHead>Rating</TableHead>
                   <TableHead></TableHead>
@@ -146,8 +148,11 @@ export default function VendorList({
                         onCheckedChange={() => selectVendor(index)}
                       />
                     </TableCell>
-                    <TableCell>{vendor.name}</TableCell>
-                    <TableCell>{vendor.link}</TableCell>
+                    <TableCell>
+                      <a href={vendor.link}>{vendor.name}</a>
+                    </TableCell>
+                    <TableCell>{vendor.sku}</TableCell>
+                    <TableCell>{vendor.phoneNumber}</TableCell>
                     <TableCell>{vendor.price}</TableCell>
                     <TableCell>{vendor.googleRating}</TableCell>
                     <TableCell>
@@ -163,7 +168,7 @@ export default function VendorList({
           {/* <Button variant="outline">Start</Button> */}
           <Button
             onClick={async () => await initiateAgents()}
-            disabled={selectedVendors.length === 0}
+            disabled={selectedVendors.length === 0 || loading}
           >
             I Know A Guy
           </Button>
