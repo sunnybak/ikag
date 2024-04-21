@@ -68,7 +68,7 @@ function App() {
             updateVendors={updateVendors}
             vendorsLoading={vendorsLoading}
           />
-          <Eval />
+          {/* <Eval /> */}
         </div>
 
         {/* </div> */}
