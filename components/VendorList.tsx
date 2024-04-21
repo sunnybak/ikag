@@ -51,7 +51,7 @@ export default function VendorList({
 
   const selectedVendors = vendors.filter((vendor) => vendor.selected);
 
-  const startPollingQuotes = () => {
+  const startPollingQuotes = (initiateNextCall: boolean) => {
     setLoading(true);
     setLoadingIndex(0);
 
@@ -69,7 +69,9 @@ export default function VendorList({
         setLoadingIndex(newQuotes.length);
 
         // Pass data
-        await initiateCall(vendors[loadingIndex].phoneNumber);
+        if (initiateNextCall) {
+          await initiateCall(vendors[loadingIndex].phoneNumber);
+        }
       }
 
       if (newQuotes.length === selectedVendors.length) {
@@ -89,16 +91,34 @@ export default function VendorList({
     // fetch http://127.0.0.1:8080/make-call/
 
     await fetch("/api/clear", { method: "POST" });
-    startPollingQuotes();
+    startPollingQuotes(true);
 
     // pass data
     await initiateCall(vendors[0].phoneNumber);
   };
 
+  const callEveryrone = async () => {
+    // const selectedVendors = vendors.filter((vendor) => vendor.selected);
+
+    // console.log("Selected Vendors", selectedVendors);
+
+    // fetch http://127.0.0.1:8080/make-call/
+
+    await fetch("/api/clear", { method: "POST" });
+    startPollingQuotes(false);
+
+    for (let i = 0; i < selectedVendors.length; i++) {
+      await initiateCall(selectedVendors[i].phoneNumber);
+    }
+  };
+
   const initiateCall = async (phoneNumber: string) => {
-    return await fetch(`http://127.0.0.1:8080/make-call/?phone=${phoneNumber}`, {
-      method: "GET",
-    })
+    return await fetch(
+      `http://127.0.0.1:8080/make-call/?phone=${phoneNumber}`,
+      {
+        method: "GET",
+      }
+    )
       .then((response) => response.json())
       .then((data) => {
         console.log("Success:", data);
@@ -164,13 +184,19 @@ export default function VendorList({
             </Table>
           )}
         </CardContent>
-        <CardFooter className="flex justify-end">
-          {/* <Button variant="outline">Start</Button> */}
+        <CardFooter className="flex justify-end gap-4">
           <Button
             onClick={async () => await initiateAgents()}
             disabled={selectedVendors.length === 0 || loading}
           >
             I Know A Guy
+          </Button>
+
+          <Button
+            onClick={async () => await callEveryrone()}
+            disabled={selectedVendors.length === 0 || loading}
+          >
+            Call Everyone
           </Button>
         </CardFooter>
       </Card>

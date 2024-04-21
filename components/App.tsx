@@ -21,7 +21,7 @@ function App() {
           link: "https://mms.mckesson.com/product/500655/Covidien-SMM-5043",
           price: 698.35,
           sku: "Covidien #SMM-5043",
-          phoneNumber: "19292806660",
+          phoneNumber: "19292806660", // Kate
           shipByDate: "2022-12-31",
           googleRating: 4.5,
           selected: true,
@@ -31,9 +31,9 @@ function App() {
           link: "https://www.henryschein.com/us-en/Shopping/ProductDetails.aspx?productid=2946635&cdivId=specialmarkets_d&CatalogName=B_PRIME&name=Maxon%20Suture%20Polyglyconate%20Copolymer%204-0%2018&quot;%20P-12%2036/Bx&did=specialmarkets_d&ShowProductCompare=true&FullPageMode=true",
           price: 326.88,
           sku: "Covidien #SMM-5043",
-          phoneNumber: "12056024338",
+          phoneNumber: "12056024338", // Kevin
           shipByDate: "2022-12-31",
-          googleRating: 4.5,
+          googleRating: 5,
           selected: true,
         },
         {
@@ -41,9 +41,9 @@ function App() {
           link: "https://www.ciamedical.com/covidien-smm5043-box-suture-maxon-mono-clr-p12-4-0-18-36-bx",
           price: 491.44,
           sku: "Covidien #SMM-5043",
-          phoneNumber: "14155164312",
+          phoneNumber: "14155164312", // Lukas
           shipByDate: "2022-12-31",
-          googleRating: 4.5,
+          googleRating: 4,
           selected: true,
         },
         {
@@ -51,19 +51,9 @@ function App() {
           link: "https://www.partssource.com/parts/united-states-surgical-covidien/SMM5043?pspn=ps66ajquman",
           price: 578.26,
           sku: "Covidien #SMM-5043",
-          phoneNumber: "19496892624",
+          phoneNumber: "19496892624", // Sunny
           shipByDate: "2022-12-31",
-          googleRating: 4.5,
-          selected: true,
-        },
-        {
-          name: "CIA Medical",
-          link: "https://www.ciamedical.com/covidien-smm5043-box-suture-maxon-mono-clr-p12-4-0-18-36-bx?srsltid=AfmBOopqTxJ_N_nHEqiMb-dzn1bv8WmNXLHWyIGIM3KFdcFCwAZOfi_z_i0",
-          price: 491.44,
-          sku: "Covidien #SMM-5043",
-          phoneNumber: "14152125794",
-          shipByDate: "2022-12-31",
-          googleRating: 4.5,
+          googleRating: 3,
           selected: true,
         },
       ]);

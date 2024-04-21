@@ -29,7 +29,9 @@ export default function SkuSearch({
   retrieveVendors: () => void;
   vendorsLoading: boolean;
 }) {
-  const [skus, setSkus] = React.useState<any[]>([]);
+  const [skus, setSkus] = React.useState<any[]>([
+    { sku: "", quantity: "", price: "", date: new Date() },
+  ]);
 
   const addRow = () => {
     setSkus([...skus, { sku: "", quantity: "", price: "", date: new Date() }]);
